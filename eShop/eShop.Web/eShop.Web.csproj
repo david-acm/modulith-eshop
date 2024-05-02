@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Payments\eShop.Payments\eShop.Payments.csproj" />
-    <ProjectReference Include="..\Shipments\eShop.Shipments\eShop.Shipments.csproj" />
-    <ProjectReference Include="..\Billing\eShop.Billing\eShop.Billing.csproj" />
   </ItemGroup>
 
 </Project>
