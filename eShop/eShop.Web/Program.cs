@@ -2,6 +2,12 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using eShop.Payments;
+using eShop.Payments.UI;
+using eShop.UI.Pages;
+using eShop.UI;
+using eShop.Web.Components;
+using MudBlazor.Services;
+using MudBlazor.Extensions;
 using eShop.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,15 +32,34 @@ builder.Services
   .SwaggerDocument()
   .AddFastEndpoints();
 
+// Add services to the container.
+builder.Services.AddRazorComponents()
+  .AddInteractiveServerComponents()
+  .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddMudServices();
+builder.Services.RegisterPaymentsSpaServices();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseStaticFiles()
+  .UseWebAssemblyDebugging();
 
 // Use FastEndpoints
 app.UseAuthentication()
   .UseAuthorization()
+  .UseRouting()
+  .UseAntiforgery()
   .UseFastEndpoints()
   .UseSwaggerGen();
+var componentBuilder = app.MapRazorComponents<App>()
+  .AddInteractiveServerRenderMode()
+  .AddInteractiveWebAssemblyRenderMode()
+  .AddAdditionalAssemblies(typeof(Counter).Assembly);
+  
+componentBuilder.AddAdditionalAssemblies(
+  typeof(ModularComponent).Assembly,
+  typeof(eShop.Shipments.UI.ShipmentsComponent).Assembly);
 
 app.Run();
 

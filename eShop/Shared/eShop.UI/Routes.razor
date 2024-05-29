@@ -1,0 +1,94 @@
+﻿@using System.Reflection
+@using eShop.Shipments.UI
+@using Microsoft.AspNetCore.Components.WebAssembly.Services
+@using MudBlazor.Extensions
+@inject ILogger<Routes>  Logger
+@inject IServiceProvider Services
+
+<Router AppAssembly="@typeof(Program).Assembly"
+        AdditionalAssemblies="Assemblies">
+  <Found Context="routeData">
+    <RouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)"/>
+    <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
+  </Found>
+</Router>
+
+@code {
+
+  private static string SolutionName => "eShop";
+
+  public Assembly[] AdditionalAssemblies
+  {
+    get
+    {
+      var files      = GetUiSolutionAssemblies();
+      var assemblies = new List<Assembly>();
+
+      files.ForEach(f => assemblies.Add(Assembly.LoadFrom(f)));
+
+      return assemblies.ToArray();
+      // return Assembly
+      // .GetExecutingAssembly()
+      // .GetReferencedAssemblies()
+      // .Where(a => a.Name?.Contains("UI") ?? false)
+      // .ToArray();
+    }
+  }
+
+  public string[] AdditionalAssemblyNames
+  {
+    get
+    {
+      var files      = GetUiSolutionAssemblies();
+      var assemblies = new List<Assembly>();
+
+      var executingAssembly = Assembly
+        .GetExecutingAssembly();
+      var referencedAssemblies = executingAssembly
+        .GetReferencedAssemblies();
+      
+      var filesTest = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory).ToList();
+      return referencedAssemblies
+        .Where(a => a.Name?.Contains("UI") ?? false)
+        .Select(a => $"{a.Name}.wasm")
+        .ToArray();
+    }
+  }
+
+  private List<Assembly> _lazyLoadedAssemblies = new();
+
+  private async Task OnNavigateAsync(NavigationContext args)
+  {
+    try
+    {
+      if (OperatingSystem.IsBrowser())
+      {
+        if (Services.GetService<LazyAssemblyLoader>() is {} assemblyLoader)
+        {
+          IEnumerable<Assembly> assemblies = new Assembly[] {};
+
+          var module = args.Path.Split('/')[0];
+
+          var names = AdditionalAssemblyNames;
+          
+          assemblies = await assemblyLoader!.LoadAssembliesAsync([$"eShop.{module}.UI.wasm"]);
+
+          _lazyLoadedAssemblies.AddRange(assemblies);
+          return;
+        }
+      }
+
+      _lazyLoadedAssemblies.AddRange(AdditionalAssemblies.ToList());
+    }
+    catch (Exception ex)
+    {
+      Logger.LogError("Error: {Message}", ex.Message);
+    }
+  }
+
+  private static List<string> GetUiSolutionAssemblies()
+    => Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, $"{SolutionName}.*.UI.dll").ToList();
+  
+  private static Assembly[] Assemblies => [typeof(ModularComponent).Assembly, typeof(ShipmentsComponent).Assembly];
+
+}
