@@ -12,7 +12,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Payments\eShop.Payments.UI\eShop.Payments.UI.csproj" />
-        <ProjectReference Include="..\Shipments\eShop.Shipments.UI\eShop.Shipments.UI.csproj" />
         <ProjectReference Include="..\Shared\eShop.UI\eShop.UI.csproj" />
     </ItemGroup>
 

@@ -18,8 +18,4 @@
     <ProjectReference Include="..\..\Shipments\eShop.Shipments.UI\eShop.Shipments.UI.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-<!--    <BlazorWebAssemblyLazyLoad Include="eShop.Payments.UI.wasm" />-->
-</ItemGroup>
-
 </Project>

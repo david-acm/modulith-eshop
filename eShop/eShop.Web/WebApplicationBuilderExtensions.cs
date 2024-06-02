@@ -6,7 +6,7 @@ namespace eShop.Web;
 public static class WebApplicationBuilderExtensions
 {
   private static string SolutionName => "eShop";
-
+  
   public static void DiscoverAndRegisterModules(this WebApplicationBuilder webApplicationBuilder)
   {
     var logger = CreateLogger(webApplicationBuilder);
@@ -82,7 +82,6 @@ public static class WebApplicationBuilderExtensions
 
     if (!TryGetServiceRegistrationClass(logger, assembly, out var serviceRegistrationClass)) return false;
 
-    var serviceRegistrationMethod = $"Add{moduleName}Services";
     method = GetRegistrationMethod(serviceRegistrationClass);
     if (method == default)
     {
@@ -98,7 +97,6 @@ public static class WebApplicationBuilderExtensions
 
   private static bool HasCorrectSignature(MethodInfo m)
   {
-
     return m.GetParameters().SingleOrDefault()?.ParameterType == typeof(WebApplicationBuilder);
   }
 

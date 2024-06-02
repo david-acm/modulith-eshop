@@ -1,13 +1,11 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using eShop.Payments;
 using eShop.Payments.UI;
-using eShop.UI.Pages;
 using eShop.UI;
+using eShop.UI.Pages;
 using eShop.Web.Components;
 using MudBlazor.Services;
-using MudBlazor.Extensions;
 using eShop.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +19,8 @@ builder.Services.AddSwaggerGen();
 
 // Or use the discover method below to try and find the services for your modules
 builder.DiscoverAndRegisterModules();
+
+builder.Services.AddBlazorAssemblyDiscovery();
 
 builder.Services
   .AddAuthenticationJwtBearer(s =>
@@ -38,7 +38,6 @@ builder.Services.AddRazorComponents()
   .AddInteractiveWebAssemblyComponents();
 
 builder.Services.AddMudServices();
-builder.Services.RegisterPaymentsSpaServices();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
@@ -52,14 +51,8 @@ app.UseAuthentication()
   .UseAntiforgery()
   .UseFastEndpoints()
   .UseSwaggerGen();
-var componentBuilder = app.MapRazorComponents<App>()
-  .AddInteractiveServerRenderMode()
-  .AddInteractiveWebAssemblyRenderMode()
-  .AddAdditionalAssemblies(typeof(Counter).Assembly);
-  
-componentBuilder.AddAdditionalAssemblies(
-  typeof(ModularComponent).Assembly,
-  typeof(eShop.Shipments.UI.ShipmentsComponent).Assembly);
+
+app.AddBlazorModulesAdditionalAssemblies();
 
 app.Run();
 

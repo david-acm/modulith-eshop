@@ -16,8 +16,9 @@
         <PackageReference Include="MudBlazor" Version="6.*" />
     </ItemGroup>
 
-    <ItemGroup>
-        <BlazorWebAssemblyLazyLoad Include="eShop.Payments.UI.{FILE EXTENSION}" />
+    <ItemGroup><!--      <ProjectReference Include="..\..\Shipments\eShop.Shipments.Contracts\eShop.Shipments.Contracts.csproj" />-->
+    
+      <ProjectReference Include="..\eShop.Payments.Contracts\eShop.Payments.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

@@ -16,4 +16,8 @@
         <PackageReference Include="MudBlazor" Version="6.*" />
     </ItemGroup>
 
+    <ItemGroup>
+        <BlazorWebAssemblyLazyLoad Include="eShop.Shipments.UI.{FILE EXTENSION}" />
+    </ItemGroup>
+
 </Project>
