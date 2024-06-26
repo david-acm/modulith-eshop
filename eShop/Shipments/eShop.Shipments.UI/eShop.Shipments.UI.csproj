@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <BlazorWebAssemblyLazyLoad Include="eShop.Shipments.UI.{FILE EXTENSION}" />
+      <ProjectReference Include="..\eShop.Shipments.HttpModels\eShop.Shipments.HttpModels.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\eShop.Shipments\eShop.Shipments.csproj" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 namespace eShop.Billing.Infrastructure;
 
-public interface ITemperatureService
+internal interface ITemperatureService
 {
   public int GetTemperature();
 }

@@ -6,7 +6,7 @@ namespace eShop.Web;
 public static class WebApplicationBuilderExtensions
 {
   private static string SolutionName => "eShop";
-  
+
   public static void DiscoverAndRegisterModules(this WebApplicationBuilder webApplicationBuilder)
   {
     var logger = CreateLogger(webApplicationBuilder);
@@ -82,6 +82,7 @@ public static class WebApplicationBuilderExtensions
 
     if (!TryGetServiceRegistrationClass(logger, assembly, out var serviceRegistrationClass)) return false;
 
+    var serviceRegistrationMethod = $"Add{moduleName}Services";
     method = GetRegistrationMethod(serviceRegistrationClass);
     if (method == default)
     {
@@ -97,6 +98,7 @@ public static class WebApplicationBuilderExtensions
 
   private static bool HasCorrectSignature(MethodInfo m)
   {
+
     return m.GetParameters().SingleOrDefault()?.ParameterType == typeof(WebApplicationBuilder);
   }
 
@@ -200,14 +202,11 @@ public static class WebApplicationBuilderExtensions
   }
 
   private static bool IsModuleAssembly(IEnumerable<string> loadedPaths, string r)
-    => !(IsAlreadyLoaded(loadedPaths, r) || IsCurrentExecutingAssembly(r) || IsSharedKernel(r));
+    => !(IsWebOrTestAssembly(r) || IsSharedKernel(r));
 
   private static bool IsSharedKernel(string r)
     => r.Contains("SharedKernel");
 
-  private static bool IsCurrentExecutingAssembly(string r)
-    => r == Assembly.GetExecutingAssembly().Location;
-
-  private static bool IsAlreadyLoaded(IEnumerable<string> loadedPaths, string r)
-    => loadedPaths.Contains(r, StringComparer.InvariantCultureIgnoreCase);
+  private static bool IsWebOrTestAssembly(string r)
+    => r.Contains(".Web.") || r.Contains(".Tests.");
 }

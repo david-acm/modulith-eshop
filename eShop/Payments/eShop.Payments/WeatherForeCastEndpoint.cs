@@ -1,10 +1,9 @@
+using eShop.Payments.HttpModels;
 using FastEndpoints;
 using static System.DateOnly;
 using static System.Random;
 
 namespace eShop.Payments;
-
-internal record WeatherForecastResponse(DateOnly Date, int TemperatureC, string? Summary);
 
 internal class WeatherForeCastEndpoint : EndpointWithoutRequest<WeatherForecastResponse[]>
 {

@@ -16,9 +16,8 @@
         <PackageReference Include="MudBlazor" Version="6.*" />
     </ItemGroup>
 
-    <ItemGroup><!--      <ProjectReference Include="..\..\Shipments\eShop.Shipments.Contracts\eShop.Shipments.Contracts.csproj" />-->
-    
-      <ProjectReference Include="..\eShop.Payments.Contracts\eShop.Payments.Contracts.csproj" />
+    <ItemGroup>
+      <ProjectReference Include="..\eShop.Payments.HttpModels\eShop.Payments.HttpModels.csproj" />
     </ItemGroup>
 
 </Project>
