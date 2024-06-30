@@ -1,7 +1,10 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
+using eShop.Payments.UI;
 using eShop.UI;
+using eShop.UI.Pages;
+using eShop.Web.Components;
 using MudBlazor.Services;
 using eShop.Web;
 
@@ -10,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddHttpClient();
 
 // Call the method where you are registering services for each module:
 // PaymentsModuleServiceRegistrar.ConfigureServices(builder);

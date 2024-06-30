@@ -1,5 +1,5 @@
 ﻿@page "/Shipments/Component"
-@using eShop.Shipments.HttpModels
+@inject HttpClient HttpClient
 
 <div class="my-component">
     This component is defined in the <strong>eShop.Shipments.UI</strong> library.
@@ -19,16 +19,16 @@ else
     <MudTable Items="_forecasts" Hover="true" SortLabel="Sort By" Elevation="0">
         <HeaderContent>
             <MudTh>
-                <MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<WeatherForecast, object>(x => x.Date)">Date</MudTableSortLabel>
+                <MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<WeatherForecastResponse, object>(x => x.Date)">Date</MudTableSortLabel>
             </MudTh>
             <MudTh>
-                <MudTableSortLabel SortBy="new Func<WeatherForecast, object>(x => x.TemperatureC)">Temp. (C)</MudTableSortLabel>
+                <MudTableSortLabel SortBy="new Func<WeatherForecastResponse, object>(x => x.TemperatureC)">Temp. (C)</MudTableSortLabel>
             </MudTh>
             <MudTh>
-                <MudTableSortLabel SortBy="new Func<WeatherForecast, object>(x => x.TemperatureF)">Temp. (F)</MudTableSortLabel>
+                <MudTableSortLabel SortBy="new Func<WeatherForecastResponse, object>(x => x.TemperatureF)">Temp. (F)</MudTableSortLabel>
             </MudTh>
             <MudTh>
-                <MudTableSortLabel SortBy="new Func<WeatherForecast, object>(x => x.Summary!)">Summary</MudTableSortLabel>
+                <MudTableSortLabel SortBy="new Func<WeatherForecastResponse, object>(x => x.Summary!)">Summary</MudTableSortLabel>
             </MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -44,7 +44,7 @@ else
 }
 
 @code {
-    private WeatherForecast[]? _forecasts;
+    private List<WeatherForecastResponse>? _forecasts;
 
     protected override async Task OnInitializedAsync()
     {
@@ -53,12 +53,19 @@ else
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        _forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        //_forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        //{
+        //    Date = startDate.AddDays(index),
+        //    TemperatureC = Random.Shared.Next(-20, 55),
+        //    Summary = summaries[Random.Shared.Next(summaries.Length)]
+        //}).ToArray();
+
+        var response       = await HttpClient.GetAsync("payments/weatherforecast");
+        var stringResponse = await response.Content.ReadAsStringAsync();
+        _forecasts = JsonSerializer.Deserialize<List<WeatherForecastResponse>>(stringResponse, new JsonSerializerOptions()
         {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
-        }).ToArray();
+            PropertyNameCaseInsensitive = true
+        });
     }
 
 

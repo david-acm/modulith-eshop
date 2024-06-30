@@ -1,6 +1,6 @@
 ﻿namespace eShop.Shipments.HttpModels;
 
-public class WeatherForecast
+public class WeatherForecastResponse
 {
     public DateOnly Date         { get; set; }
     public int      TemperatureC { get; set; }

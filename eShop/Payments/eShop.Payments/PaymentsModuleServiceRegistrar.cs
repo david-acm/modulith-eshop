@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using eShop.Payments.HttpModels;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using eShop.SharedKernel;
 
@@ -10,6 +11,8 @@ public class PaymentsModuleServiceRegistrar : IRegisterModuleServices
   {
     builder.Services.AddMediatR(
       c => c.RegisterServicesFromAssemblies(typeof(AssemblyInfo).Assembly));
+
+    builder.Services.AddScoped<IWeatherForecastService, ServerWeatherForecastService>();
 
     return builder;
   }
