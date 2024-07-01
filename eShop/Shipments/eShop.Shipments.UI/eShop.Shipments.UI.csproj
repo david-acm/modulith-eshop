@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Shared\eShop.SharedKernel\eShop.SharedKernel.csproj" />
       <ProjectReference Include="..\eShop.Shipments.HttpModels\eShop.Shipments.HttpModels.csproj" />
     </ItemGroup>
 

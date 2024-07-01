@@ -1,16 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using eShop.Shipments.HttpModels;
+using Microsoft.Extensions.DependencyInjection;
 using eShop.SharedKernel;
 
 namespace eShop.Shipments;
 
 public class ShipmentsModuleServiceRegistrar : IRegisterModuleServices
 {
-  public static IHostApplicationBuilder ConfigureServices(IHostApplicationBuilder builder)
+  public static IServiceCollection ConfigureServices(IServiceCollection services)
   {
-    builder.Services.AddMediatR(
+    services.AddMediatR(
       c => c.RegisterServicesFromAssemblies(typeof(AssemblyInfo).Assembly));
+      
+    services.AddScoped<IWeatherForecastService, ServerWeatherForecastService>();
 
-    return builder;
+    return services;
   }
 }

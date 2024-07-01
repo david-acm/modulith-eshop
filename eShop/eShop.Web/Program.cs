@@ -1,10 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
-using eShop.Payments.UI;
 using eShop.UI;
-using eShop.UI.Pages;
-using eShop.Web.Components;
 using MudBlazor.Services;
 using eShop.Web;
 
@@ -18,7 +15,7 @@ builder.Services.AddSwaggerGen();
 // PaymentsModuleServiceRegistrar.ConfigureServices(builder);
 
 // Or use the discover method below to try and find the services for your modules
-builder.DiscoverAndRegisterModules();
+builder.Services.DiscoverAndRegisterModules();
 
 builder.Services.AddBlazorAssemblyDiscovery();
 
@@ -58,8 +55,5 @@ app.Run();
 
 namespace eShop.Web
 {
-  public partial class Program
-  {
-    
-  }
+  public partial class Program;
 }

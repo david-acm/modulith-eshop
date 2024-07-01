@@ -6,7 +6,7 @@ namespace eShop.Web;
 
 public static class ConventionBuilderExtensions
 {
-  public static WebApplication AddBlazorModulesAdditionalAssemblies(this WebApplication app)
+  public static void AddBlazorModulesAdditionalAssemblies(this WebApplication app)
   {
     var discoveryService = app.Services.GetRequiredService<IBlazorAssemblyDiscoveryService>();
     
@@ -19,6 +19,5 @@ public static class ConventionBuilderExtensions
       .ToList()
       .ForEach( a => componentBuilder.AddAdditionalAssemblies(a));
 
-    return app;
   }
 }

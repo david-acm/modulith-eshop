@@ -1,5 +1,5 @@
 ﻿@page "/Shipments/Component"
-@inject HttpClient HttpClient
+@inject IWeatherForecastService WeatherForecastService
 
 <div class="my-component">
     This component is defined in the <strong>eShop.Shipments.UI</strong> library.
@@ -10,7 +10,7 @@
 <MudText Typo="Typo.h3" GutterBottom="true">Weather forecast</MudText>
 <MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
 
-@if (_forecasts == null)
+@if (!_forecasts.Any())
 {
     <MudProgressCircular Color="Color.Default" Indeterminate="true"/>
 }
@@ -38,35 +38,18 @@ else
             <MudTd DataLabel="Summary">@context.Summary</MudTd>
         </RowTemplate>
         <PagerContent>
-            <MudTablePager PageSizeOptions="new int[] { 50, 100 }"/>
+            <MudTablePager PageSizeOptions="new[] { 50, 100 }"/>
         </PagerContent>
     </MudTable>
 }
 
 @code {
-    private List<WeatherForecastResponse>? _forecasts;
+    private IEnumerable<WeatherForecastResponse> _forecasts = [];
 
     protected override async Task OnInitializedAsync()
     {
 // Simulate asynchronous loading to demonstrate a loading indicator
         await Task.Delay(500);
-
-        var startDate = DateOnly.FromDateTime(DateTime.Now);
-        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        //_forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //{
-        //    Date = startDate.AddDays(index),
-        //    TemperatureC = Random.Shared.Next(-20, 55),
-        //    Summary = summaries[Random.Shared.Next(summaries.Length)]
-        //}).ToArray();
-
-        var response       = await HttpClient.GetAsync("payments/weatherforecast");
-        var stringResponse = await response.Content.ReadAsStringAsync();
-        _forecasts = JsonSerializer.Deserialize<List<WeatherForecastResponse>>(stringResponse, new JsonSerializerOptions()
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        _forecasts = await WeatherForecastService.GetWeatherForecastAsync();
     }
-
-
 }

@@ -1,19 +1,18 @@
 ﻿using eShop.Payments.HttpModels;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using eShop.SharedKernel;
 
 namespace eShop.Payments;
 
 public class PaymentsModuleServiceRegistrar : IRegisterModuleServices
 {
-  public static IHostApplicationBuilder ConfigureServices(IHostApplicationBuilder builder)
+  public static IServiceCollection ConfigureServices(IServiceCollection services)
   {
-    builder.Services.AddMediatR(
+    services.AddMediatR(
       c => c.RegisterServicesFromAssemblies(typeof(AssemblyInfo).Assembly));
+      
+    services.AddScoped<IWeatherForecastService, ServerWeatherForecastService>();
 
-    builder.Services.AddScoped<IWeatherForecastService, ServerWeatherForecastService>();
-
-    return builder;
+    return services;
   }
 }

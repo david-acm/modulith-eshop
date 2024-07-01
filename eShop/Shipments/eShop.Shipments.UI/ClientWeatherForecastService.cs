@@ -1,13 +1,13 @@
 using System.Text.Json;
-using eShop.Payments.HttpModels;
+using eShop.Shipments.HttpModels;
 
-namespace eShop.Payments.UI;
+namespace eShop.Shipments.UI;
 
 public class ClientWeatherForecastService(HttpClient client) : IWeatherForecastService
 {
   public async Task<IEnumerable<WeatherForecastResponse>> GetWeatherForecastAsync()
   {
-    var response       = await client.GetAsync("Payments/weatherforecast");
+    var response       = await client.GetAsync("Shipments/weatherforecast");
     var stringResponse = await response.Content.ReadAsStringAsync();
     var forecasts = JsonSerializer.Deserialize<List<WeatherForecastResponse>>(stringResponse, new JsonSerializerOptions()
     {

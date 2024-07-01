@@ -38,7 +38,7 @@ else
             <MudTd DataLabel="Summary">@context.Summary</MudTd>
         </RowTemplate>
         <PagerContent>
-            <MudTablePager PageSizeOptions="new int[] { 50, 100 }"/>
+            <MudTablePager PageSizeOptions="new[] { 50, 100 }"/>
         </PagerContent>
     </MudTable>
 }
@@ -52,6 +52,4 @@ else
         await Task.Delay(500);
         _forecasts = await WeatherForecastService.GetWeatherForecastAsync();
     }
-
-
 }

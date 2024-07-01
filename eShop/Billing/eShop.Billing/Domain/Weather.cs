@@ -1,5 +1,3 @@
-using eShop.Billing.Api;
-
 namespace eShop.Billing.Domain;
 
 internal class Weather(DateOnly date, int temperatureC, Summary summary)
