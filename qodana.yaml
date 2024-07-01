@@ -8,8 +8,6 @@ ide: QDNET
 #Specify inspection profile for code analysis
 profile:
   name: qodana.starter
-dotnet:
-  solution: eShop
 include:
   - name: SuggestBaseTypeForParameter
   - name: ParameterTypeCanBeEnumerable.Local
