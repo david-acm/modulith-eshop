@@ -16,12 +16,12 @@ public class BillingServiceRegistrar : IRegisterModuleServices
 
     services.AddScoped<IWeatherForecastService, WeatherForecastService>();
     services.AddScoped<ITemperatureService, FakeTemperatureService>();
-    
+
     logger.LogInformation("⚙️ Billing module services registered");
 
     return services;
   }
-  
+
   private static ILogger<IServiceCollection> GetLogger(IServiceCollection services)
     => services
       .BuildServiceProvider()

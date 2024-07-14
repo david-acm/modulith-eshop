@@ -17,8 +17,9 @@ public class BillingTypesShould
   {
     var domainTypes = Types()
       .That()
-      .ResideInNamespace("eShop.Billing.*", useRegularExpressions: true)
-      .And().AreNot([typeof(AssemblyInfo), typeof(BillingServiceRegistrar)])
+      .ResideInNamespace("eShop.Billing.*", true)
+      .And()
+      .AreNot([typeof(AssemblyInfo), typeof(BillingServiceRegistrar)])
       .As("Module types");
 
     var rule = domainTypes.Should().BeInternal();

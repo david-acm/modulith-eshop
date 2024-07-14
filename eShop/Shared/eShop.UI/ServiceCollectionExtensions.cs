@@ -5,11 +5,8 @@ namespace eShop.UI;
 
 public static class ServiceCollectionExtensions
 {
-  public static void AddBlazorAssemblyDiscovery(this IServiceCollection services)
-  {
-    services.AddSingleton<IBlazorAssemblyDiscoveryService, BlazorAssemblyDiscoveryService>();
-  }
-  
+  public static void AddBlazorAssemblyDiscovery(this IServiceCollection services) => services.AddSingleton<IBlazorAssemblyDiscoveryService, BlazorAssemblyDiscoveryService>();
+
   public static void RegisterClientSideServices(this IServiceCollection services)
   {
     var logger           = CreateLogger();
@@ -62,7 +59,10 @@ public static class ServiceCollectionExtensions
   {
     method = default;
 
-    if (!TryGetServiceRegistrationClass(logger, assembly, out var serviceRegistrationClass)) return false;
+    if (!TryGetServiceRegistrationClass(logger, assembly, out var serviceRegistrationClass))
+    {
+      return false;
+    }
 
     method = GetRegistrationMethod(serviceRegistrationClass);
     if (method == default)
@@ -93,7 +93,7 @@ public static class ServiceCollectionExtensions
       assembly.GetName().Name);
     return true;
   }
-  
+
   private static Type? GetRegisterServicesClass(Assembly assembly)
     => assembly.GetTypes().FirstOrDefault(t => t.IsClass && t.IsAssignableTo(typeof(IRegisterModuleServices)));
 }

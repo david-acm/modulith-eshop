@@ -17,32 +17,34 @@ public class DomainTypesShould
   {
     var domainTypes = ArchRuleDefinition.Types()
       .That()
-      .ResideInNamespace("eShop.Billing.Domain.*", useRegularExpressions: true)
-      .And().AreNot([typeof(AssemblyInfo), typeof(BillingServiceRegistrar)])
+      .ResideInNamespace("eShop.Billing.Domain.*", true)
+      .And()
+      .AreNot([typeof(AssemblyInfo), typeof(BillingServiceRegistrar)])
       .As("Domain types");
-    
+
     var apiTypes = ArchRuleDefinition.Types()
       .That()
-      .ResideInNamespace("eShop.Billing.Api.*", useRegularExpressions: true)
+      .ResideInNamespace("eShop.Billing.Api.*", true)
       .As("Api types");
 
     var rule = domainTypes.Should().NotDependOnAny(apiTypes);
 
     rule.Check(Architecture);
   }
-  
+
   [Fact]
   public void NotDependOnInfraTypes()
   {
     var domainTypes = ArchRuleDefinition.Types()
       .That()
-      .ResideInNamespace("eShop.Billing.Domain.*", useRegularExpressions: true)
-      .And().AreNot([typeof(AssemblyInfo), typeof(BillingServiceRegistrar)])
+      .ResideInNamespace("eShop.Billing.Domain.*", true)
+      .And()
+      .AreNot([typeof(AssemblyInfo), typeof(BillingServiceRegistrar)])
       .As("Domain types");
-    
+
     var apiTypes = ArchRuleDefinition.Types()
       .That()
-      .ResideInNamespace("eShop.Billing.Infrastructure.*", useRegularExpressions: true)
+      .ResideInNamespace("eShop.Billing.Infrastructure.*", true)
       .As("Api types");
 
     var rule = domainTypes.Should().NotDependOnAny(apiTypes);

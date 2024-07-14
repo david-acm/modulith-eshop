@@ -5,13 +5,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="mediatr" Version="12.2.0" />
-        <PackageReference Include="FastEndpoints" Version="5.24.0" />
+        <PackageReference Include="mediatr" Version="12.2.0"/>
+        <PackageReference Include="FastEndpoints" Version="5.24.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Shared\eShop.SharedKernel\eShop.SharedKernel.csproj" />
-      <ProjectReference Include="..\eShop.Payments.HttpModels\eShop.Payments.HttpModels.csproj" />
+        <ProjectReference Include="..\..\Shared\eShop.SharedKernel\eShop.SharedKernel.csproj"/>
+        <ProjectReference Include="..\eShop.Payments.HttpModels\eShop.Payments.HttpModels.csproj"/>
     </ItemGroup>
 
 </Project>

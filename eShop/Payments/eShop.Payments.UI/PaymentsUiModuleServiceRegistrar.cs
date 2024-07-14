@@ -1,10 +1,10 @@
-using eShop.Payments.HttpModels;
 using eShop.SharedKernel;
+using eShop.Payments.HttpModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace eShop.Payments.UI;
 
-public class ShipmentsUiModuleServiceRegistrar : IRegisterModuleServices
+public class PaymentsUiModuleServiceRegistrar : IRegisterModuleServices
 {
   public static IServiceCollection ConfigureServices(IServiceCollection services)
   {

@@ -20,8 +20,7 @@ builder.Services.DiscoverAndRegisterModules();
 builder.Services.AddBlazorAssemblyDiscovery();
 
 builder.Services
-  .AddAuthenticationJwtBearer(s =>
-  {
+  .AddAuthenticationJwtBearer(s => {
     // TODO: Add dotnet secrets
     s.SigningKey = builder.Configuration["Auth:JwtSecret"];
   })
@@ -55,5 +54,5 @@ app.Run();
 
 namespace eShop.Web
 {
-  public partial class Program;
+public partial class Program;
 }

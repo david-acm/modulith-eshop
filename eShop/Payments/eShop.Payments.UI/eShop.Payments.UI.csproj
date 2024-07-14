@@ -13,12 +13,12 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.4"/>
-        <PackageReference Include="MudBlazor" Version="6.*" />
+        <PackageReference Include="MudBlazor" Version="6.*"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Shared\eShop.SharedKernel\eShop.SharedKernel.csproj" />
-      <ProjectReference Include="..\eShop.Payments.HttpModels\eShop.Payments.HttpModels.csproj" />
+        <ProjectReference Include="..\..\Shared\eShop.SharedKernel\eShop.SharedKernel.csproj"/>
+        <ProjectReference Include="..\eShop.Payments.HttpModels\eShop.Payments.HttpModels.csproj"/>
     </ItemGroup>
 
 </Project>

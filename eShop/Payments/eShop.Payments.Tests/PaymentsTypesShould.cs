@@ -17,8 +17,9 @@ public class PaymentsTypesShould
   {
     var domainTypes = Types()
       .That()
-      .ResideInNamespace("eShop.Payments.*", useRegularExpressions: true)
-      .And().AreNot([typeof(AssemblyInfo), typeof(PaymentsModuleServiceRegistrar)])
+      .ResideInNamespace("eShop.Payments.*", true)
+      .And()
+      .AreNot([typeof(AssemblyInfo), typeof(PaymentsModuleServiceRegistrar)])
       .As("Module types");
 
     var rule = domainTypes.Should().BeInternal();

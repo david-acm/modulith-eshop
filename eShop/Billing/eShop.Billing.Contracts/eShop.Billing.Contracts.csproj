@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\eShop.Billing\eShop.Billing.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\eShop.Billing\eShop.Billing.csproj"/>
+    </ItemGroup>
 </Project>

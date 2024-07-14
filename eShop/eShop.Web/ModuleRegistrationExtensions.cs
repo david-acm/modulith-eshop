@@ -19,10 +19,10 @@ public static class ModuleRegistrationExtensions
   }
 
   private static ILogger CreateLogger()
-    => LoggerFactory.Create(config =>
-    {
-      config.AddConsole();
-    }).CreateLogger(nameof(ModuleRegistrationExtensions));
+    => LoggerFactory.Create(config => {
+        config.AddConsole();
+      })
+      .CreateLogger(nameof(ModuleRegistrationExtensions));
 
   private static List<AssemblyName> DiscoverModuleAssemblies(ILogger logger)
   {
@@ -74,7 +74,10 @@ public static class ModuleRegistrationExtensions
   {
     method = default;
 
-    if (!TryGetServiceRegistrationClass(logger, assembly, out var serviceRegistrationClass)) return false;
+    if (!TryGetServiceRegistrationClass(logger, assembly, out var serviceRegistrationClass))
+    {
+      return false;
+    }
 
     method = GetRegistrationMethod(serviceRegistrationClass);
     if (method == default)
@@ -111,8 +114,7 @@ public static class ModuleRegistrationExtensions
   private static List<Assembly> LoadAssembliesToApp(List<AssemblyName> assemblyModuleNames, ILogger logger)
   {
     var addedAssemblies = new List<Assembly>();
-    assemblyModuleNames.ForEach(assemblyName =>
-    {
+    assemblyModuleNames.ForEach(assemblyName => {
       logger.LogDebug("🐞 Loading module from assembly: {assembly}", $"{assemblyName.Name} {assemblyName.Version}");
       try
       {
@@ -130,10 +132,7 @@ public static class ModuleRegistrationExtensions
     return addedAssemblies;
   }
 
-  private static List<string> GetAssembliesPaths(IEnumerable<string> solutionAssemblies)
-  {
-    return solutionAssemblies.Where(IsModuleAssembly).ToList();
-  }
+  private static List<string> GetAssembliesPaths(IEnumerable<string> solutionAssemblies) => solutionAssemblies.Where(IsModuleAssembly).ToList();
 
   private static string[] GetAllSolutionAssemblies()
     => Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, $"{SolutionName}.*.dll");

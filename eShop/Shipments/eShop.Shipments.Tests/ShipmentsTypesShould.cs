@@ -17,8 +17,9 @@ public class ShipmentsTypesShould
   {
     var domainTypes = Types()
       .That()
-      .ResideInNamespace("eShop.Shipments.*", useRegularExpressions: true)
-      .And().AreNot([typeof(AssemblyInfo), typeof(ShipmentsModuleServiceRegistrar)])
+      .ResideInNamespace("eShop.Shipments.*", true)
+      .And()
+      .AreNot([typeof(AssemblyInfo), typeof(ShipmentsModuleServiceRegistrar)])
       .As("Module types");
 
     var rule = domainTypes.Should().BeInternal();
