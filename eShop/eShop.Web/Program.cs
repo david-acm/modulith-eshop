@@ -54,5 +54,5 @@ app.Run();
 
 namespace eShop.Web
 {
-public partial class Program;
+  public partial class Program;
 }
