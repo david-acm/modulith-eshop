@@ -4,7 +4,7 @@ using static System.Random;
 
 namespace eShop.Payments;
 
-public class ServerWeatherForecastService : IWeatherForecastService
+internal class ServerWeatherForecastService : IWeatherForecastService
 {
   public Task<IEnumerable<WeatherForecastResponse>> GetWeatherForecastAsync()
   {
