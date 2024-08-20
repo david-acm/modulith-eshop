@@ -1,9 +1,9 @@
 using FastEndpoints;
 using eShop.Payments.HttpModels;
 
-namespace eShop.Payments;
+namespace eShop.Payments.WeatherForecastEndpoints;
 
-internal class Endpoint(IWeatherForecastService weatherForecastService) : EndpointWithoutRequest<IEnumerable<WeatherForecastResponse>>
+internal class List(IWeatherForecastService weatherForecastService) : EndpointWithoutRequest<IEnumerable<WeatherForecastResponse>>
 {
   public override void Configure()
   {
